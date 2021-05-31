@@ -1,0 +1,442 @@
+//# BankManagement
+//This was made by Mohammed kaif on 31-05-2021.
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<windows.h>
+#include<dos.h>
+#include<stdlib.h>
+void menu();
+void new_acc();
+void upd_acc();
+void transact();
+void accs_info();
+void del_acc();
+void view_cust();
+void close1();
+void fordelay(int f);
+int value, choice,i,j,n;
+
+void fordelay(int f)
+{
+	int s,a;
+	for(s=0;s<f;s++)
+	{
+		a=s;
+	}
+}
+
+struct date
+{
+	int day,month,year;
+}d1;
+struct important
+{
+	int acc_num;
+	char name[100];
+	struct date dob;
+	int age;
+	char address[100];
+	char citizen[20];
+	char phone[15];
+	char acc_type[50];
+	int balance;
+	int deposit, withdraw;
+}add[100],upd,check,del;
+
+void execute()
+{
+	for(i=0;i<100;i++)
+	{
+		add[i].acc_num = 0;
+	}
+}
+int main_exit;
+int main()
+{
+	char entered_password[10] , real_password[10] = "mycap" ;
+	i =0;
+	execute();
+	printf("PLEASE ENTER PASSWORD TO LOG IN : \n");
+	scanf("%s",entered_password);
+
+	/*if(entered_password[i]!=13 && entered_password[i]!=8 )
+	{
+		printf("");
+		entered_password[i]=getch();
+		n=i++;
+	}*/
+	if(strcmp(entered_password,real_password)==0)	
+	{
+		printf("Password matched. Login succesfull");
+		/*for (i = 0; i < 6;i++)
+		{
+			fordelay(1000);
+			printf(".");
+		}*/
+		system("cls");
+		menu();
+	}
+	else
+	{
+		printf("You have entered a wrong password");
+		login_try:
+		printf("\nEnter 1 to retry and 0 to exit");
+		scanf("%d",&main_exit);
+		if(main_exit==1)
+		{
+			system("cls");
+			main();
+		}
+		else if(main_exit==0)
+		{
+			system("cls");
+			close1();
+		}
+		else
+		{
+			printf("\nInvalid");
+			fordelay(1000);
+			system("cls");
+			goto login_try;
+		}
+	}
+	return 0;
+}
+void menu()
+{
+	system("cls");
+	system("color 9");
+	printf("\n\n\t\t\tCUSTOMER ACCOUNT BANKING MANAGEMENT SYSTEM");
+	printf("\n\n\n\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2WELCOME TO THE MAIN MENU\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	printf("\n\n\t\t1.Create new account.\n\t\t2.Update information of existing account.\n\t\t3.For transactions.\n\t\t4.Check the details of existing account.\n\t\t5.Remove existing account.\n\t\t6.View customers list.\n\t\t7.Exit\n\n\n");
+	scanf("%d",&choice);
+
+	system("cls");
+	switch(choice)
+	{
+		case 1 : new_acc();
+		break;
+		case 2 : upd_acc();
+		break;
+		case 3 : transact();
+		break;
+		case 4 : accs_info();
+		break;
+		case 5 : del_acc();
+		break;
+		case 6 : view_cust();
+		break;
+		case 7 : close1();
+		break;
+	}
+}
+void new_acc()
+{
+	back_here:
+	system("cls");
+	printf("Enter the order number of the account [Ex: 1,2,3,4...100]");
+	scanf("%d" ,&i);
+	system("cls");
+	char save[] = "Savings Account";
+	char current[] = "Current Account";
+	char fix1[] = "Fixed Account for 1 year";
+	char fix2[] = "Fixed Account for 2 year";
+	char fix3[] = "Fixed Account for 3 year";
+	yes :
+	printf("Enter the account number :  ");
+	scanf("%d",&add[i].acc_num);
+	for(j=0;j<n;j++)
+	{
+		if(add[i].acc_num==add[j].acc_num)
+		{
+			printf("Account number already in use. Please enter a different Account number");
+			goto yes;
+		}
+		else
+			break;
+	}
+	printf("\n\nEnter the name of the account holder : ");
+	scanf("%s" ,add[i].name);
+	printf("\n\nEnter the date of birth : ");
+	scanf("%d",add[i].dob);
+	printf("\n\nEnter the address :  ");
+	scanf("%s" ,add[i].address);
+	printf("\n\nEnter the age of the account holder : ");
+	scanf("%d",&add[i].age);
+	printf("\n\nEnter your citizenship :  ");
+	scanf("%s" ,add[i].citizen);
+	printf("\n\nEnter the phone number :  ");
+	scanf("%s" ,add[i].phone);
+	printf("\n\nEnter the deposit amount :  ");
+	scanf("%d",&add[i].deposit);
+	add[i].balance =add[i].balance + add[i].deposit;
+	printf("\n\nEnter the type of account you want to create : ");
+	printf("\n\t\t1.Savings Account.\n\t\t2.Current Account.\n\t\t3.Fixed for 1 year.\n\t\t4.Fixed for 2 years.\n\t\t5.Fixed for 3 years.\n\n");
+	printf("\n\n\t\t\t\t\tEnter your choice : ");
+	scanf("%d",&choice);
+	switch(choice)
+	{
+		case 1 :strcpy(add[i].acc_type , save);
+			printf("%s created succesfully" , add[i].acc_type);
+			break;
+		case 2 : strcpy(add[i].acc_type , current);
+			printf("%s created succesfully" , add[i].acc_type);
+			break;
+		case 3 : strcpy(add[i].acc_type , fix1);
+			printf("%s created succesfully" , add[i].acc_type);
+			break;
+		case 4 : strcpy(add[i].acc_type , fix2);
+			printf("%s created succesfully" , add[i].acc_type);
+			break;
+		case 5 : strcpy(add[i].acc_type , fix3);
+			printf("%s created succesfully" , add[i].acc_type);
+			break;
+	}
+	printf("\n\nAccount succesfully created.\n\nEnter 1 to go to main menu,  2 to create another account and 0 to exit ");
+	scanf("%d",&value);
+	if(value==1)
+		menu();
+	else if(value==2) 
+		goto back_here;
+	else
+		close1();
+}
+void close1()
+{
+	system("cls");
+	printf("This C mini project is developed by Mohammed Kaif\n\t\t\t\tTHANK YOU!");
+}
+void upd_acc()
+{
+	re_enter_account_number_for_updation :
+	system("cls");
+	int x=0;
+	printf("\n\n\t\t\t\tEDITING AN EXISTING ACCOUNT");
+	printf("\n\nEnter your account number : ");
+	scanf("%d",&upd.acc_num);
+	for(i=0;i<100;i++)
+	{
+		if(add[i].acc_num== upd.acc_num)
+		{
+			selection :
+			x=1;
+			printf("\n\nSelect your choice : ");
+			printf("\n\n1.Update the account holder name.\n2.Update DOB.\n3.Update Age.\n4.Update address.\n5.Update citizenship.\n6.Update Phone number.\n\n");
+			scanf("%d",&choice);
+			switch(choice)
+			{
+				case 1 : printf("\n\nEnter the proper name of account holder : ");
+					scanf("%s" ,add[i].name);
+					printf("\nUpdated name succesfully.");
+					break;
+				case 2 : printf("\n\nEnter proper date of birth of account holder : ");
+					scanf("%d",&add[i].dob);
+					printf("\nUpdated dob succesfully.");
+					break;
+				case 3 : printf("\n\nEnter proper age of the account holder : ");
+					scanf("%d",&add[i].age);
+					printf("\nUpdated age succesfully.");
+					break;
+				case 4 : printf("\n\nEnter the current address of the account holder : ");
+					scanf("%s" ,add[i].address);
+					printf("\nUpdated address succesfully.");
+					break;
+				case 5 : printf("\n\nEnter the citizenship of the account holder : ");
+					scanf("%s" ,add[i].citizen);
+					printf("\nUpdated citizenship succesfully.");
+					break;
+				case 6 : printf("\n\nEnter the phone number of the account holder : ");
+					scanf("%s" ,add[i].phone);
+					printf("\nUpdated phone number succesfully.");
+					break;
+			}
+			printf("\n\nEnter 1 to update more details of this account and 0 to return to the main menu.");
+			scanf("%d",&value);
+			if(value==1)
+				goto selection;
+			else if(value==0)
+				menu();
+		}
+	}
+	if(x==0)
+	{
+		printf("\nNot a valid account number!!\n\nEnter 1 to retry account number and 0 to return to main menu");
+		scanf("%d",&value);
+		if(value==1)
+			goto re_enter_account_number_for_updation;
+		else if(value==0)
+			menu();
+	}
+}
+void transact()
+{
+	transaction :
+	system("cls");
+	int y=0;
+	int yay;
+	printf("\n\n\t\t\t\tBANKING");
+	printf("\n\nEnter your account number : ");
+	scanf("%d",&check.acc_num);
+	for(i=0;i<100;i++)
+	{
+		if(add[i].acc_num== check.acc_num)
+		{
+			boss :
+			y=1;
+			printf("\n\nEnter your choice : ");
+			printf("\n\n1.Deposit.\n2.Withdraw\n\n");
+			scanf("%d",&choice);
+			if(choice==1)
+			{
+				printf("\nEnter the amount to be deposited :");
+				scanf("%d",&add[i].deposit);
+				add[i].balance+= add[i].deposit; 
+				printf("Transaction succesfull.\n\nAvailable Balance : %d" , add[i].balance);
+			}
+			else if(choice==2)
+			{
+				printf("\nEnter the amount to withdraw :");
+				scanf("%d",&add[i].withdraw);
+				if(add[i].balance>= add[i].withdraw)
+				{	
+					add[i].balance-= add[i].withdraw;
+					printf("Transaction succesfull.\n\nAvailable Balance : %d" , add[i].balance);
+				}
+				else
+				{
+					printf("Insufficient Amount.");
+					goto transaction;
+				}
+			}
+			printf("\n\nEnter 1 to do more transactions in this account and 0 to return to main menu");
+			scanf("%d",&yay);
+			if(yay==1)
+				goto boss;
+			else 
+				menu();
+		}
+	}
+	if(y==0)
+	{
+		printf("\nNot a valid account number!!\n\nEnter 1 to retry account number and 0 to return to main menu");
+		scanf("%d",&value);
+		if(value==1)
+			goto transaction;
+		else if(value==0)
+			menu();
+	}
+}
+void accs_info()
+{
+	int z=0;
+	woah :
+	system("cls");
+	printf("\n\n\t\t\t\tVIEWING ACCOUNT DETAILS");
+	printf("\n\nEnter your account number : ");
+	scanf("%d",&check.acc_num);
+	system("cls");
+	printf("Loading...");
+	fordelay(4000);
+	system("cls");
+	for(i=0;i<100;i++)
+	{
+		if(add[i].acc_num== check.acc_num)
+		{
+			z=1;
+			printf("\n\nAccount number : %d" , add[i].acc_num);
+			printf("\n\nDate of account created : %d" , add[i].dob);
+			printf("\n\nAccount holder name : %s" , add[i].name);
+			printf("\n\nDate of birth of Account holder: %d",add[i].dob);
+			printf("\n\nAge of Account holder : %d" , add[i].age);
+			printf("\n\nAddress of Account holder : %s" , add[i].address);
+			printf("\n\nCitizenship of Account holder : %s" , add[i].citizen);
+			printf("\n\nPhone number of Account holder : %s" , add[i].phone);
+			printf("\n\nType of account : %s" , add[i].acc_type);
+			printf("\n\nAccount Balance : %d" , add[i].balance);
+		}
+	}
+	if(z==0)
+	{
+		printf("\nNot a valid account number!!\n\nEnter 1 to retry account number and 0 to return to main menu");
+		scanf("%d",&value);
+		if(value==1)
+			goto woah;
+		else if(value==0)
+			menu();
+	}
+	else
+	{
+		printf("\n\nEnter 1 to go to main menu and 0 to exit.\n");
+		scanf("%d",&value);
+		if(value==1)
+			menu();
+		else if(value==0)
+			close1();
+	}
+}
+void del_acc()
+{
+	int m=0;
+	deletion : 
+	system("cls");
+	printf("\nEnter the account number of the account to be deleted : ");
+	scanf("%d",&del.acc_num);
+	system("cls");
+	printf("Loading...");
+	fordelay(4000);
+	system("cls");
+	for(i=0;i<100;i++)
+	{
+		if(add[i].acc_num == del.acc_num)
+		{
+			m=1;
+			for(j=i;j<100;j++)
+			{
+				add[j] = add[j+1];
+			}
+			printf("\n\nAccount deleted succesfully.");
+			--n;
+			printf("\n\nEnter 1 to return to main menu and 0 to exit : ");
+			scanf("%d",&value);
+			if(value==1)
+				menu();
+			else if(value==0)
+				close1();
+		}
+	}
+	if(m==0)
+	{
+		printf("\nNot a valid account number!!\n\nEnter 1 to retry account number and 0 to return to main menu");
+		scanf("%d",&value);
+		if(value==1)
+			goto deletion;
+		else if(value==0)
+			menu();
+	}
+}
+void view_cust()
+{
+	system("cls");
+	printf("Loading...");
+	fordelay(4000);
+	system("cls");
+	for(i=0;i<100;i++)
+	{
+		if(add[i].acc_num != 0)
+		{
+			printf("\n\t\t\tDETAILS OF ACCOUNT %d ",i);
+			printf("\n\nAccount Number : %d",add[i].acc_num);
+			printf("\nAccount holder Name : %s",add[i].name);
+			printf("\nPhone Number : %s",add[i].phone);
+			printf("\nAddress : %s",add[i].address);
+			printf("\n\n");
+		}
+	}
+	printf("\n\nEnter 1 to return to main menu and 0 to exit : ");
+	scanf("%d",&value);
+	if(value == 1)
+		menu();
+	else
+		close1();
+}
